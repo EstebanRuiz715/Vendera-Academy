@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ t("registro_page_title") }}</title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="auth">
+
+        <section class="auth__brand">
+
+           <a href="{{ url_for('inicio') }}" class="auth__logo">
+    <img
+        src="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+        alt="Logo de Vendera Academy"
+        class="auth__logo-image"
+    >
+</a>
+
+
+            <div class="auth__brand-content">
+
+            <span class="auth__eyebrow">
+                {{ t("registro_brand_label") }}
+            </span>
+
+            <h1>
+                {{ t("registro_brand_titulo_1") }}
+                <span>{{ t("registro_brand_titulo_2") }}</span>
+            </h1>
+
+            <p>
+                {{ t("registro_brand_texto") }}
+            </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="auth__panel">
+
+            <div class="auth__form-wrapper">
+
+                <a
+                    href="{{ url_for('inicio') }}"
+                    class="auth__back"
+                >
+                    {{ t("volver_inicio") }}
+                </a>
+
+                <div class="auth__language">
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='es',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'es' %}active{% endif %}"
+                >
+                    ES
+                </a>
+
+                <span>/</span>
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='en',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'en' %}active{% endif %}"
+                >
+                    EN
+                </a>
+
+            </div>
+
+
+            <div class="auth__heading">
+
+                <span>
+                    {{ t("registro_label") }}
+                </span>
+
+                <h2>
+                    {{ t("registro_titulo") }}
+                </h2>
+
+                <p>
+                    {{ t("registro_subtitulo") }}
+                </p>
+
+            </div>
+
+                {% if error %}
+
+    <div class="auth__error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+    <form
+        class="auth__form"
+        method="POST"
+        action="{{ url_for('registro', plan=plan) }}"
+    >
+
+    <input
+    type="hidden"
+    name="csrf_token"
+    value="{{ csrf_token() }}"
+>
+
+    <input
+        type="hidden"
+        name="plan"
+        value="{{ plan or '' }}"
+>
+
+                    <div class="auth__field">
+
+                    <label for="nombre">
+                        {{ t("campo_nombre") }}
+                    </label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            placeholder="{{ t('placeholder_nombre') }}"
+                            autocomplete="given-name"
+                            required
+                            data-error="{{ t('error_nombre_html') }}"
+                            oninvalid="this.setCustomValidity(this.dataset.error)"
+                            oninput="this.setCustomValidity('')"
+                        >
+
+                    </div>
+
+
+                    <div class="auth__field">
+
+                    <label for="email">
+                        {{ t("campo_email") }}
+                    </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="{{ t('placeholder_email') }}"
+                            autocomplete="email"
+                            required
+                            data-error="{{ t('error_email_html') }}"
+                            oninvalid="this.setCustomValidity(this.dataset.error)"
+                            oninput="this.setCustomValidity('')"
+                        >
+
+                    </div>
+
+
+                    <div class="auth__field">
+
+                        <label for="password">
+                            {{ t("campo_password") }}
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="{{ t('registro_password') }}"
+                            autocomplete="new-password"
+                            minlength="8"
+                            required
+                            data-error="{{ t('error_password_corta') }}"
+                            oninvalid="this.setCustomValidity(this.dataset.error)"
+                            oninput="this.setCustomValidity('')"
+                        >
+
+                    </div>
+
+
+                    <div class="auth__field">
+
+                    <label for="confirm_password">
+                        {{ t("campo_confirmar_password") }}
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirm_password"
+                        name="confirm_password"
+                        placeholder="{{ t('registro_confirmar_password') }}"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                        data-error="{{ t('error_password_corta') }}"
+                        oninvalid="this.setCustomValidity(this.dataset.error)"
+                        oninput="this.setCustomValidity('')"
+                    >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth__button"
+                    >
+                        {{ t("registro_boton") }}
+                    </button>
+
+                </form>
+
+
+                <p class="auth__switch">
+
+                    {{ t("registro_con_cuenta") }}
+
+                    <a href="{{ url_for('login', plan=plan) }}">
+                        {{ t("registro_login") }}
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

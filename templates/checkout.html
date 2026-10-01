@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ t("checkout_title") }}
+    </title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+<main class="checkout">
+
+    <div class="checkout__card">
+
+        <div class="auth__language checkout__language">
+
+            <a
+                href="{{ url_for(
+                    'cambiar_idioma',
+                    codigo='es',
+                    next=request.full_path
+                ) }}"
+                class="{% if idioma == 'es' %}active{% endif %}"
+            >
+                ES
+            </a>
+
+            <span>/</span>
+
+            <a
+                href="{{ url_for(
+                    'cambiar_idioma',
+                    codigo='en',
+                    next=request.full_path
+                ) }}"
+                class="{% if idioma == 'en' %}active{% endif %}"
+            >
+                EN
+            </a>
+
+        </div>
+
+            <span class="checkout__eyebrow">
+                {{ t("checkout_demo") }}
+            </span>
+
+            <h1>
+                {{ t("checkout_resumen") }}
+            </h1>
+
+            <p class="checkout__welcome">
+                {{ t("checkout_hola") }}, {{ session["nombre"] }}.
+            </p>
+
+
+            <div class="checkout__plan">
+
+                <div>
+
+                    <span>
+                        {{ t("checkout_plan") }}
+                    </span>
+
+                    <strong>
+                        {{ plan.nombre }}
+                    </strong>
+
+                    <p>
+                        {% if plan_id == "basic" %}
+                            {{ t("checkout_curso_basic") }}
+
+                        {% elif plan_id == "standard" %}
+                            {{ t("checkout_curso_standard") }}
+
+                        {% else %}
+                            {{ t("checkout_curso_premium") }}
+                        {% endif %}
+                    </p>
+
+                </div>
+
+
+                <div class="checkout__price">
+
+                    <span>
+                        USD
+                    </span>
+
+                    <strong>
+                        {{ plan.precio }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="checkout__warning">
+
+            <strong>
+                {{ t("checkout_entorno") }}
+            </strong>
+
+            <p>
+                {{ t("checkout_sin_cobro") }}
+            </p>
+
+            </div>
+
+
+<form
+    method="POST"
+    action="{{ url_for('confirmar_compra', plan=plan_id) }}"
+>
+
+    <input
+        type="hidden"
+        name="csrf_token"
+        value="{{ csrf_token() }}"
+    >
+
+    <button
+        type="submit"
+        class="auth__button"
+    >
+        {{ t("checkout_confirmar") }}
+    </button>
+
+</form>
+
+
+            <a
+                href="{{ url_for('inicio') }}#planes"
+                class="checkout__back"
+            >
+                 {{ t("checkout_cambiar_plan") }}
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vendera Academy</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <a href="{{ url_for('inicio') }}" class="navbar__logo">
+        <img
+            src="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+            alt="Logo de Vendera Academy"
+            class="navbar__logo-image"
+        >
+    </a>
+
+
+    <nav class="navbar__links">
+        <a href="#inicio">
+    {{ t("nav_inicio") }}
+</a>
+
+<a href="#metodo">
+    {{ t("nav_metodo") }}
+</a>
+
+<a href="#santiago">
+    {{ t("nav_santiago") }}
+</a>
+
+<a href="#planes">
+    {{ t("nav_planes") }}
+</a>
+    </nav>
+
+
+    <div class="navbar__actions">
+
+        <div class="navbar__language">
+
+    <a
+        href="{{ url_for(
+            'cambiar_idioma',
+            codigo='es',
+            next=request.full_path
+        ) }}"
+        class="{% if idioma == 'es' %}active{% endif %}"
+    >
+        ES
+    </a>
+
+    <span>
+        /
+    </span>
+
+    <a
+        href="{{ url_for(
+            'cambiar_idioma',
+            codigo='en',
+            next=request.full_path
+        ) }}"
+        class="{% if idioma == 'en' %}active{% endif %}"
+    >
+        EN
+    </a>
+
+</div>
+
+        {% if session.get("usuario_id") %}
+
+            <details class="navbar__account">
+
+                <summary>
+                    {{ session.get("nombre", "Usuario").split()[0] }}
+                </summary>
+
+                <div class="navbar__account-menu">
+
+                    <a href="{{ url_for('mis_cursos') }}">
+                        {{ t("nav_mis_cursos") }}
+                    </a>
+
+                    <a
+                        href="{{ url_for('logout') }}"
+                        class="navbar__logout"
+                    >
+                        {{ t("nav_logout") }}
+                    </a>
+
+                </div>
+
+            </details>
+
+        {% else %}
+
+            <a
+                href="{{ url_for('login') }}"
+                class="navbar__button"
+            >
+                {{ t("nav_login") }}
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</header>
+
+
+    <main>
+
+        <section class="hero" id="inicio">
+
+            <div class="hero__content">
+
+                <span class="hero__eyebrow">
+                    {{ t("hero_label") }}
+                </span>
+
+                <h1>
+                    {{ t("hero_titulo_1") }}
+                    <span>{{ t("hero_titulo_2") }}</span>
+                </h1>
+
+                <p class="hero__description">
+                    {{ t("hero_texto") }}
+                </p>
+
+                <div class="hero__buttons">
+
+                    <a href="#planes" class="button button--primary">
+                        {{ t("hero_planes") }}
+                    </a>
+
+                    <a href="#metodo" class="button button--secondary">
+                        {{ t("hero_programa") }}
+                    </a>
+
+                </div>
+
+                <div class="hero__details">
+
+                    <span>✓ {{ t("hero_beneficio_1") }}</span>
+                    <span>✓ {{ t("hero_beneficio_2") }}</span>
+                    <span>✓ {{ t("hero_beneficio_3") }}</span>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero__video-wrapper">
+
+                <video
+                    class="hero__video"
+                    controls
+                    preload="metadata"
+                >
+                    <source
+                        src="{{ url_for('static', filename='video/presentacion.mp4') }}"
+                        type="video/mp4"
+                    >
+
+                    {{ t("video_no_soportado") }}
+                </video>
+
+            </div>
+
+        </section>
+
+
+        <section class="intro" id="metodo">
+
+            <div class="intro__label">
+                {{ t("intro_label") }}
+            </div>
+
+            <h2>
+                {{ t("intro_titulo_1") }}
+                <span>{{ t("intro_titulo_2") }}</span>
+            </h2>
+
+            <p>
+                {{ t("intro_texto") }}
+            </p>
+
+        </section>
+
+                <section class="santiago" id="santiago">
+
+            <div class="santiago__image-wrapper">
+
+                <img
+                    src="{{ url_for('static', filename='img/Santiago-Oficina.png') }}"
+                    alt="Santiago Moretti, fundador de Vendera Academy"
+                    class="santiago__image"
+                >
+
+                <div class="santiago__image-badge">
+                    <span>{{ t("santiago_label") }}</span>
+                    {{ t("santiago_nombre") }}
+                </div>
+
+            </div>
+
+
+            <div class="santiago__content">
+
+                <span class="section-label">
+                    {{ t("santiago_subtitulo") }}
+                </span>
+
+                <h2>
+                    {{ t("santiago_titulo_1") }}
+                    <span>{{ t("santiago_titulo_2") }}</span>
+                </h2>
+
+                <p class="santiago__lead">
+                    {{ t("santiago_texto_1") }}
+                </p>
+
+                <p>
+                    {{ t("santiago_texto_2") }}
+                </p>
+
+                <p>
+                    {{ t("santiago_texto_3") }}
+                </p>
+
+                <blockquote class="santiago__quote">
+                    {{ t("santiago_frase") }}
+                </blockquote>
+
+
+            </div>
+
+
+        </section>
+
+                <section class="aprendizaje">
+
+            <div class="aprendizaje__header">
+
+                <span class="section-label">
+                    {{ t("aprender_label") }}
+                </span>
+
+                <h2>
+                    {{ t("aprender_titulo_1") }}
+                    <span>{{ t("aprender_titulo_2") }}</span>
+                </h2>
+
+                <p>
+                    {{ t("aprender_texto") }}
+                </p>
+
+            </div>
+
+
+            <div class="aprendizaje__grid">
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        01
+                    </div>
+
+                    <h3>{{ t("skill_1_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_1_texto") }}
+                    </p>
+
+
+                </article>
+
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        02
+                    </div>
+
+                    <h3>{{ t("skill_2_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_2_texto") }}
+                    </p>
+
+                </article>
+
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        03
+                    </div>
+
+                    <h3>{{ t("skill_3_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_3_texto") }}
+                    </p>
+
+                </article>
+
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        04
+                    </div>
+
+                    <h3>{{ t("skill_4_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_4_texto") }}
+                    </p>
+
+                </article>
+
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        05
+                    </div>
+
+                    <h3>{{ t("skill_5_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_5_texto") }}
+                    </p>
+
+                </article>
+
+
+                <article class="skill-card">
+
+                    <div class="skill-card__number">
+                        06
+                    </div>
+
+                    <h3>{{ t("skill_6_titulo") }}</h3>
+
+                    <p>
+                        {{ t("skill_6_texto") }}
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+                <section class="metodo-vendera">
+
+            <div class="metodo-vendera__header">
+
+                <span class="section-label">
+                    {{ t("metodo_label") }}
+                </span>
+
+                <h2>
+                    {{ t("metodo_titulo_1") }}
+                    <span>{{ t("metodo_titulo_2") }}</span>
+                </h2>
+
+                <p>
+                    {{ t("metodo_texto") }}
+                </p>
+
+            </div>
+
+
+            <div class="metodo-vendera__process">
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        01
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_1_titulo") }}</h3>
+                    <p>{{ t("metodo_1_texto") }}</p>
+
+                </article>
+
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        02
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_2_titulo") }}</h3>
+                    <p>{{ t("metodo_2_texto") }}</p>
+
+                </article>
+
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        03
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_3_titulo") }}</h3>
+                    <p>{{ t("metodo_3_texto") }}</p>
+
+                </article>
+
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        04
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_4_titulo") }}</h3>
+                    <p>{{ t("metodo_4_texto") }}</p>
+
+                </article>
+
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        05
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_5_titulo") }}</h3>
+                    <p>{{ t("metodo_5_texto") }}</p>
+
+                </article>
+
+
+                <article class="process-step">
+
+                    <span class="process-step__number">
+                        06
+                    </span>
+
+                    <div class="process-step__dot"></div>
+
+                    <h3>{{ t("metodo_6_titulo") }}</h3>
+                    <p>{{ t("metodo_6_texto") }}</p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+                <section class="experiencia">
+
+            <div class="experiencia__content">
+
+                <span class="section-label">
+                    {{ t("experiencia_label") }}
+                </span>
+
+                <h2>
+                    {{ t("experiencia_titulo_1") }}
+                    <span>{{ t("experiencia_titulo_2") }}</span>
+                </h2>
+
+                <p class="experiencia__lead">
+                    {{ t("experiencia_texto_1") }}
+                </p>
+
+                <p>
+                    {{ t("experiencia_texto_2") }}
+                </p>
+
+                <div class="experiencia__points">
+
+                    <div class="experiencia__point">
+                        <span>01</span>
+                        <p>{{ t("experiencia_punto_1") }}</p>
+                    </div>
+
+                    <div class="experiencia__point">
+                        <span>02</span>
+                        <p>{{ t("experiencia_punto_2") }}</p>
+                    </div>
+
+                    <div class="experiencia__point">
+                        <span>03</span>
+                        <p>{{ t("experiencia_punto_3") }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="experiencia__image-wrapper">
+
+                <img
+                    src="{{ url_for('static', filename='img/Santiago-reunion.png') }}"
+                    alt="Santiago Moretti durante una reunión de trabajo"
+                    class="experiencia__image"
+                >
+
+                <div class="experiencia__caption">
+                    <span>{{ t("experiencia_caption_1") }}</span>
+                    {{ t("experiencia_caption_2") }}
+                </div>
+
+            </div>
+
+        </section>
+
+                <section class="planes" id="planes">
+
+            <div class="planes__header">
+
+                <span class="section-label">
+                    {{ t("planes_label") }}
+                </span>
+
+                <h2>
+                    {{ t("planes_titulo_1") }}
+                    <span>{{ t("planes_titulo_2") }}</span>
+                </h2>
+
+                <p>
+                    {{ t("planes_texto") }}
+                </p>
+
+            </div>
+
+
+            <div class="planes__grid">
+
+                <!-- BASIC -->
+
+                <article class="plan-card">
+
+                    <div class="plan-card__top">
+
+                        <span class="plan-card__label">
+                            BASIC
+                        </span>
+
+                        <h3>{{ t("plan_basic_nombre") }}</h3>
+
+                        <p>
+                            {{ t("plan_basic_texto") }}
+                        </p>
+
+                    </div>
+
+
+                    <div class="plan-card__price">
+
+                        <span class="plan-card__currency">
+                            USD
+                        </span>
+
+                        <span class="plan-card__amount">
+                            29
+                        </span>
+
+                        <span class="plan-card__payment">
+                            {{ t("pago_unico") }}
+                        </span>
+
+                    </div>
+
+
+                    <ul class="plan-card__features">
+
+                    <li>{{ t("basic_feature_1") }}</li>
+                    <li>{{ t("basic_feature_2") }}</li>
+                    <li>{{ t("basic_feature_3") }}</li>
+                    <li>{{ t("basic_feature_4") }}</li>
+                    <li>{{ t("basic_feature_5") }}</li>
+
+                    </ul>
+
+
+                    {% if plan_actual in ["basic", "standard", "premium"] %}
+
+                        <div class="plan-card__owned">
+
+                            {% if plan_actual == "basic" %}
+                                {{ t("tu_plan_actual") }}
+                            {% else %}
+                                {{ t("incluido_plan") }}
+                            {% endif %}
+
+                        </div>
+
+                    {% else %}
+
+                        <a
+                            href="{{ url_for('checkout', plan='basic') if session.get('usuario_id') else url_for('login', plan='basic') }}"
+                            class="plan-card__button"
+                        >
+                            {{ t("elegir_basic") }}
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+
+                <!-- STANDARD -->
+
+                <article class="plan-card plan-card--featured">
+
+                    <div class="plan-card__recommended">
+                        {{ t("plan_recomendado") }}
+                    </div>
+
+                    <div class="plan-card__top">
+
+                        <span class="plan-card__label">
+                            STANDARD
+                        </span>
+
+                        <h3>{{ t("plan_standard_nombre") }}</h3>
+
+                        <p>
+                            {{ t("plan_standard_texto") }}
+                        </p>
+
+                    </div>
+
+
+                    <div class="plan-card__price">
+
+                        <span class="plan-card__currency">
+                            USD
+                        </span>
+
+                        <span class="plan-card__amount">
+                            59
+                        </span>
+
+                        <span class="plan-card__payment">
+                            {{ t("pago_unico") }}
+                        </span>
+
+                    </div>
+
+
+                    <ul class="plan-card__features">
+
+                    <li>{{ t("standard_feature_1") }}</li>
+                    <li>{{ t("standard_feature_2") }}</li>
+                    <li>{{ t("standard_feature_3") }}</li>
+                    <li>{{ t("standard_feature_4") }}</li>
+                    <li>{{ t("standard_feature_5") }}</li>
+
+                    </ul>
+
+
+                    {% if plan_actual in ["standard", "premium"] %}
+
+                        <div class="plan-card__owned plan-card__owned--featured">
+
+                            {% if plan_actual == "standard" %}
+                                {{ t("tu_plan_actual") }}
+                            {% else %}
+                                {{ t("incluido_plan") }}
+                            {% endif %}
+
+                        </div>
+
+                    {% else %}
+
+                        <a
+                            href="{{ url_for('checkout', plan='standard') if session.get('usuario_id') else url_for('login', plan='standard') }}"
+                            class="plan-card__button plan-card__button--featured"
+                        >
+
+                            {% if plan_actual == "basic" %}
+                                {{ t("mejorar_standard") }}
+                            {% else %}
+                                {{ t("elegir_standard") }}
+                            {% endif %}
+
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+
+                <!-- PREMIUM -->
+
+                <article class="plan-card">
+
+                    <div class="plan-card__top">
+
+                        <span class="plan-card__label">
+                            PREMIUM
+                        </span>
+
+                        <h3>{{ t("plan_premium_nombre") }}</h3>
+
+                        <p>
+                            {{ t("plan_premium_texto") }}
+                        </p>
+
+                    </div>
+
+
+                    <div class="plan-card__price">
+
+                        <span class="plan-card__currency">
+                            USD
+                        </span>
+
+                        <span class="plan-card__amount">
+                            99
+                        </span>
+
+                        <span class="plan-card__payment">
+                            {{ t("pago_unico") }}
+                        </span>
+
+                    </div>
+
+
+                    <ul class="plan-card__features">
+
+                    <li>{{ t("premium_feature_1") }}</li>
+                    <li>{{ t("premium_feature_2") }}</li>
+                    <li>{{ t("premium_feature_3") }}</li>
+                    <li>{{ t("premium_feature_4") }}</li>
+                    <li>{{ t("premium_feature_5") }}</li>
+
+                    </ul>
+
+
+                    {% if plan_actual == "premium" %}
+
+                        <div class="plan-card__owned">
+                            {{ t("tu_plan_actual") }}
+                        </div>
+
+                    {% else %}
+
+                        <a
+                            href="{{ url_for('checkout', plan='premium') if session.get('usuario_id') else url_for('login', plan='premium') }}"
+                            class="plan-card__button"
+                        >
+
+                            {% if plan_actual in ["basic", "standard"] %}
+                                {{ t("mejorar_premium") }}
+                            {% else %}
+                                {{ t("elegir_premium") }}
+                            {% endif %}
+
+                        </a>
+
+                    {% endif %}
+
+                </article>
+
+            </div>
+
+
+            <p class="planes__notice">
+                {{ t("planes_aviso") }}
+            </p>
+
+        </section>
+
+               <section class="faq">
+
+                <div class="faq__header">
+
+                    <span class="section-label">
+                        {{ t("faq_label") }}
+                    </span>
+
+                    <h2>
+                        {{ t("faq_titulo_1") }}
+                        <span>
+                            {{ t("faq_titulo_2") }}
+                        </span>
+                    </h2>
+
+                </div>
+
+
+                <div class="faq__list">
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q1") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a1") }}
+                        </p>
+
+                    </details>
+
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q2") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a2") }}
+                        </p>
+
+                    </details>
+
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q3") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a3") }}
+                        </p>
+
+                    </details>
+
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q4") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a4") }}
+                        </p>
+
+                    </details>
+
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q5") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a5") }}
+                        </p>
+
+                    </details>
+
+
+                    <details class="faq__item">
+
+                        <summary>
+                            {{ t("faq_q6") }}
+                        </summary>
+
+                        <p>
+                            {{ t("faq_a6") }}
+                        </p>
+
+                    </details>
+
+                </div>
+
+            </section>
+
+
+                <section class="final-cta">
+
+                    <div class="final-cta__content">
+
+                        <span class="section-label">
+                            {{ t("cta_label") }}
+                        </span>
+
+                        <h2>
+                            {{ t("cta_titulo_1") }}
+
+                            <span>
+                                {{ t("cta_titulo_2") }}
+                            </span>
+                        </h2>
+
+                        <p>
+                            {{ t("cta_texto") }}
+                        </p>
+
+                        <a
+                            href="#planes"
+                            class="button button--primary"
+                        >
+                            {{ t("cta_boton") }}
+                        </a>
+
+                    </div>
+
+                </section>
+
+    </main>
+
+
+    <footer class="footer">
+
+        <p>
+            {{ t("footer_texto") }}
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

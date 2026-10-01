@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>{{ t("login_page_title") }}</title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="auth">
+
+        <section class="auth__brand">
+
+            <a href="{{ url_for('inicio') }}" class="auth__logo">
+    <img
+        src="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+        alt="Logo de Vendera Academy"
+        class="auth__logo-image"
+    >
+</a>
+
+
+            <div class="auth__brand-content">
+
+            <span class="auth__eyebrow">
+                VENDERA ACADEMY
+            </span>
+
+            <h1>
+                {{ t("login_brand_titulo_1") }}
+                <span>{{ t("login_brand_titulo_2") }}</span>
+            </h1>
+
+            <p>
+                {{ t("login_brand_texto") }}
+            </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="auth__panel">
+
+            <div class="auth__form-wrapper">
+
+                <a
+                    href="{{ url_for('inicio') }}"
+                    class="auth__back"
+                >
+                    {{ t("volver_inicio") }}
+                </a>
+
+            <div class="auth__language">
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='es',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'es' %}active{% endif %}"
+                >
+                    ES
+                </a>
+
+                <span>/</span>
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='en',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'en' %}active{% endif %}"
+                >
+                    EN
+                </a>
+
+            </div>                
+
+                <div class="auth__heading">
+
+                    <span>
+                        {{ t("login_label") }}
+                    </span>
+
+                    <h2>
+                        {{ t("login_titulo") }}
+                    </h2>
+
+                    <p>
+                        {{ t("login_subtitulo") }}
+                    </p>
+
+                </div>
+
+                {% if error %}
+
+    <div class="auth__error">
+        {{ error }}
+    </div>
+
+    {% endif %}
+
+    {% if plan %}
+
+        <div class="auth__selected-plan">
+
+            <span>
+                {{ t("plan_seleccionado") }}
+            </span>
+
+            <strong>
+                {{ plan|upper }}
+            </strong>
+
+            <p>
+                {{ t("continuar_compra") }}
+            </p>
+
+        </div>
+
+    {% endif %}
+
+                <form
+                    class="auth__form"
+                    method="POST"
+                    action="{{ url_for('login', plan=plan) }}"
+                >
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}"
+                >       
+
+                <input
+                    type="hidden"
+                    name="plan"
+                    value="{{ plan or '' }}"
+                >
+
+                    <div class="auth__field">
+
+                        <label for="email">
+                            {{ t("campo_email") }}
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="{{ t('placeholder_email') }}"
+                            autocomplete="email"
+                        >
+
+                    </div>
+
+
+                    <div class="auth__field">
+
+                        <label for="password">
+                            {{ t("campo_password") }}
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="{{ t('placeholder_password') }}"
+                            autocomplete="current-password"
+                        >
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="auth__button"
+                    >
+                        {{ t("login_boton") }}
+                    </button>
+
+                </form>
+
+
+                <p class="auth__switch">
+
+                    {{ t("login_sin_cuenta") }}
+
+                    <a href="{{ url_for('registro', plan=plan) }}">
+                        {{ t("login_crear_cuenta") }}
+                    </a>
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

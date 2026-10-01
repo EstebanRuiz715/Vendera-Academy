@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+    {{ t("cursos_title") }}
+    </title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="courses-dashboard">
+
+        <div class="courses-dashboard__header">
+
+            <div>
+
+                <span class="section-label">
+                    {{ t("cuenta_label") }}
+                </span>
+
+                <h1>
+                    {{ t("mis_cursos_titulo") }}
+                </h1>
+
+                <p>
+                    {{ t("mis_cursos_hola") }}, {{ session["nombre"] }}.
+                    {{ t("mis_cursos_texto") }}
+                </p>
+
+            </div>
+
+
+            <div class="courses-dashboard__actions">
+
+            <div class="auth__language courses__language">
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='es',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'es' %}active{% endif %}"
+                >
+                    ES
+                </a>
+
+                <span>/</span>
+
+                <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='en',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'en' %}active{% endif %}"
+                >
+                    EN
+                </a>
+
+            </div>
+
+                <a
+                    href="{{ url_for('inicio') }}"
+                    class="courses-dashboard__link"
+                >
+                    {{ t("volver_inicio_texto") }}
+                </a>
+
+                <a
+                    href="{{ url_for('logout') }}"
+                    class="courses-dashboard__logout"
+                >
+                    {{ t("cerrar_sesion_texto") }}
+                </a>
+
+            </div>
+
+        </div>
+
+                <section class="account-summary">
+
+            <div class="account-summary__item">
+
+                <span>
+                    {{ t("mayor_acceso") }}
+                </span>
+
+                <strong>
+                    {% if plan_actual %}
+                        {{ plan_actual|upper }}
+                    {% else %}
+                        {{ t("sin_plan") }}
+                    {% endif %}
+                </strong>
+
+            </div>
+
+
+            <div class="account-summary__item">
+
+                <span>
+                    {{ t("cursos_desbloqueados") }}
+                </span>
+
+                <strong>
+                    {{ recursos|length }}
+                </strong>
+
+            </div>
+
+
+            <div class="account-summary__item">
+
+                <span>
+                    {{ t("compras_demo") }}
+                </span>
+
+                <strong>
+                    {{ compras|length }}
+                </strong>
+
+            </div>
+
+        </section>
+
+        <div class="courses-dashboard__grid">
+
+
+            <!-- FUNDAMENTOS -->
+
+            <article
+                class="course-access-card
+                {% if 'fundamentos' not in recursos %}
+                    course-access-card--locked
+                {% endif %}"
+            >
+
+                <span>
+                    {{ t("curso_01") }}
+                </span>
+
+                <h2>
+                    {{ t("curso_fundamentos_nombre") }}
+                </h2>
+
+                <p>
+                    {{ t("curso_fundamentos_desc") }}
+                </p>
+
+
+                {% if 'fundamentos' in recursos %}
+
+                    <a href="{{ url_for('curso', curso_id='fundamentos') }}">
+                 {{ t("abrir_curso") }}
+                    </a>
+
+                 {% else %}
+
+                    <div class="course-access-card__locked">
+                        {{ t("bloqueado") }}
+                    </div>
+
+                {% endif %}
+
+            </article>
+
+
+            <!-- PROSPECCIÓN -->
+
+            <article
+                class="course-access-card
+                {% if 'prospeccion' not in recursos %}
+                    course-access-card--locked
+                {% endif %}"
+            >
+
+                <span>
+                    {{ t("curso_02") }}
+                </span>
+
+                <h2>
+                    {{ t("curso_prospeccion_nombre") }}
+                </h2>
+
+                <p>
+                    {{ t("curso_prospeccion_desc") }}
+                </p>
+
+
+                {% if 'prospeccion' in recursos %}
+
+                <a href="{{ url_for('curso', curso_id='prospeccion') }}">
+                    {{ t("abrir_curso") }}
+                </a>
+
+                {% else %}
+
+                    <div class="course-access-card__locked">
+                        {{ t("bloqueado") }}
+                    </div>
+
+                {% endif %}
+
+            </article>
+
+
+            <!-- CLOSING -->
+
+            <article
+                class="course-access-card
+                {% if 'closing' not in recursos %}
+                    course-access-card--locked
+                {% endif %}"
+            >
+
+                <span>
+                    {{ t("curso_03") }}
+                </span>
+
+                <h2>
+                    {{ t("curso_closing_nombre") }}
+                </h2>
+
+                <p>
+                    {{ t("curso_closing_desc") }}
+                </p>
+
+
+                {% if 'closing' in recursos %}
+
+                <a href="{{ url_for('curso', curso_id='closing') }}">
+                    {{ t("abrir_curso") }}
+                </a>
+
+                {% else %}
+
+                    <div class="course-access-card__locked">
+                        {{ t("bloqueado") }}
+                    </div>
+
+                {% endif %}
+
+            </article>
+
+        </div>
+
+                <section class="purchase-history">
+
+            <div class="purchase-history__header">
+
+                <span>
+                    {{ t("historial_label") }}
+                </span>
+
+                <h2>
+                    {{ t("mis_compras") }}
+                </h2>
+
+                <p>
+                    {{ t("historial_texto") }}
+                </p>
+
+            </div>
+
+
+            {% if compras %}
+
+                <div class="purchase-history__list">
+
+                    {% for compra in compras %}
+
+                        <div class="purchase-item">
+
+                                <div>
+
+                                    <span class="purchase-item__plan">
+                                        {{ compra.plan|upper }}
+                                    </span>
+
+                                    <p>
+                                        {{ t("compra_demo_texto") }}
+                                    </p>
+
+                                </div>
+
+
+                            <div class="purchase-item__info">
+
+                                <span>
+                                    USD {{ compra.monto }}
+                                </span>
+
+                                <span class="purchase-item__status">
+
+                                    {% if compra.estado == "aprobado" %}
+                                        {{ t("estado_aprobado") }}
+                                    {% else %}
+                                        {{ compra.estado|upper }}
+                                    {% endif %}
+
+                                </span>
+
+                                <span>
+                                    {{ compra.fecha_compra }}
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <div class="purchase-history__empty">
+                    {{ t("sin_compras") }}
+                </div>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

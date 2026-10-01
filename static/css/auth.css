@@ -1,0 +1,2084 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    min-height: 100%;
+}
+
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #070908;
+
+    color: #ffffff;
+}
+
+
+a {
+    color: inherit;
+}
+
+
+.auth {
+    min-height: 100vh;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(420px, 1fr)
+        minmax(480px, 0.8fr);
+}
+
+
+/* =========================
+   LADO DE MARCA
+========================= */
+
+.auth__brand {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    padding:
+        55px
+        8%;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #07100d,
+            #050706
+        );
+}
+
+.auth__brand::before,
+.auth__brand::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(90px);
+
+    opacity: 0.55;
+
+    z-index: 0;
+}
+
+
+/* LUZ 1 */
+
+.auth__brand::before {
+    width: 420px;
+    height: 420px;
+
+    top: 8%;
+    left: 5%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 217, 155, 0.24),
+            rgba(0, 217, 155, 0.08) 45%,
+            transparent 72%
+        );
+
+    animation:
+        glowMoveOne 12s ease-in-out infinite alternate,
+        glowPulseOne 7s ease-in-out infinite;
+}
+
+
+/* LUZ 2 */
+
+.auth__brand::after {
+    width: 500px;
+    height: 500px;
+
+    right: -12%;
+    bottom: -14%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0, 217, 155, 0.20),
+            rgba(0, 217, 155, 0.07) 46%,
+            transparent 72%
+        );
+
+    animation:
+        glowMoveTwo 15s ease-in-out infinite alternate,
+        glowPulseTwo 9s ease-in-out infinite;
+}
+
+
+
+.auth__logo {
+    width: fit-content;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+}
+
+
+
+.auth__logo-image {
+    display: block;
+
+    height: 78px;
+    width: auto;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 8px rgba(0, 217, 155, 0.16))
+        drop-shadow(0 0 20px rgba(0, 217, 155, 0.08));
+}
+
+
+.auth__brand-content {
+    max-width: 720px;
+
+    position: relative;
+
+    z-index: 2;
+
+    margin:
+        auto
+        0;
+}
+
+
+.auth__eyebrow {
+    display: inline-block;
+
+    margin-bottom: 24px;
+
+    color: #00d99b;
+
+    font-size: 0.72rem;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+}
+
+
+.auth__brand-content h1 {
+    max-width: 750px;
+
+    font-size: clamp(
+        3.2rem,
+        6vw,
+        6.5rem
+    );
+
+    line-height: 0.98;
+
+    letter-spacing: -4px;
+}
+
+
+.auth__brand-content h1 span {
+    display: block;
+
+    color: #777f7c;
+}
+
+
+.auth__brand-content p {
+    max-width: 580px;
+
+    margin-top: 30px;
+
+    color: #9da4a1;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.auth__panel {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        60px
+        8%;
+
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.06);
+
+    background: #090b0a;
+}
+
+
+.auth__form-wrapper {
+    width: 100%;
+
+    max-width: 480px;
+}
+
+
+.auth__back {
+    display: inline-block;
+
+    margin-bottom: 55px;
+
+    color: #7f8784;
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+
+    transition: color 0.2s ease;
+}
+
+
+.auth__back:hover {
+    color: #ffffff;
+}
+
+.auth__language {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin:
+        -35px
+        0
+        45px;
+
+    color: #59615e;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.auth__language a {
+    color: #69716e;
+
+    text-decoration: none;
+}
+
+
+.auth__language a.active {
+    color: #00d99b;
+}
+
+
+.auth__language a:hover {
+    color: #ffffff;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.auth__heading span {
+    color: #00d99b;
+
+    font-size: 0.67rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.auth__heading h2 {
+    margin-top: 14px;
+
+    font-size: 2.6rem;
+
+    letter-spacing: -2px;
+}
+
+
+.auth__heading p {
+    margin-top: 12px;
+
+    color: #858d8a;
+
+    font-size: 0.95rem;
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.auth__error {
+    margin-top: 25px;
+
+    padding:
+        14px
+        16px;
+
+    border: 1px solid rgba(255, 92, 92, 0.25);
+
+    border-radius: 9px;
+
+    background: rgba(255, 92, 92, 0.06);
+
+    color: #ff9d9d;
+
+    font-size: 0.85rem;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   PLAN SELECCIONADO
+========================= */
+
+.auth__selected-plan {
+    margin-top: 25px;
+
+    padding:
+        16px
+        18px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.20);
+
+    border-radius: 10px;
+
+    background:
+        rgba(0, 217, 155, 0.045);
+}
+
+.auth__selected-plan span {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #00d99b;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+.auth__selected-plan strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 1.05rem;
+}
+
+.auth__selected-plan p {
+    margin-top: 6px;
+
+    color: #858d8a;
+
+    font-size: 0.82rem;
+
+    line-height: 1.5;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.auth__form {
+    display: grid;
+
+    gap: 21px;
+
+    margin-top: 38px;
+}
+
+
+.auth__field {
+    display: grid;
+
+    gap: 9px;
+}
+
+
+.auth__field label {
+    color: #c9cecc;
+
+    font-size: 0.82rem;
+
+    font-weight: 600;
+}
+
+
+.auth__field input {
+    width: 100%;
+
+    height: 54px;
+
+    padding:
+        0
+        17px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.09);
+
+    border-radius: 9px;
+
+    outline: none;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #ffffff;
+
+    font-size: 0.95rem;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.auth__field input::placeholder {
+    color: #5e6663;
+}
+
+
+.auth__field input:focus {
+    border-color: rgba(0, 217, 155, 0.65);
+
+    background: rgba(0, 217, 155, 0.025);
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+.auth__button {
+    width: 100%;
+
+    min-height: 54px;
+
+    margin-top: 5px;
+
+    border: 0;
+
+    border-radius: 9px;
+
+    background: #00d99b;
+
+    color: #04110d;
+
+    cursor: pointer;
+
+    font-size: 0.95rem;
+
+    font-weight: 800;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.auth__button:hover {
+    background: #16e4a8;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   CAMBIO LOGIN / REGISTRO
+========================= */
+
+.auth__switch {
+    margin-top: 27px;
+
+    color: #7f8784;
+
+    text-align: center;
+
+    font-size: 0.85rem;
+}
+
+
+.auth__switch a {
+    margin-left: 4px;
+
+    color: #00d99b;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+
+.auth__switch a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
+   ANIMACIONES DE LUZ
+========================= */
+
+@keyframes glowMoveOne {
+
+    0% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(120px, 80px)
+            scale(1.12);
+    }
+
+    100% {
+        transform:
+            translate(40px, 180px)
+            scale(0.95);
+    }
+
+}
+
+
+@keyframes glowPulseOne {
+
+    0%,
+    100% {
+        opacity: 0.38;
+    }
+
+    50% {
+        opacity: 0.68;
+    }
+
+}
+
+
+@keyframes glowMoveTwo {
+
+    0% {
+        transform:
+            translate(0, 0)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translate(-120px, -70px)
+            scale(1.08);
+    }
+
+    100% {
+        transform:
+            translate(-50px, -170px)
+            scale(0.92);
+    }
+
+}
+
+
+@keyframes glowPulseTwo {
+
+    0%,
+    100% {
+        opacity: 0.28;
+    }
+
+    50% {
+        opacity: 0.58;
+    }
+
+}
+
+/* =========================
+   CHECKOUT
+========================= */
+
+.checkout {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 5%;
+
+    background:
+        radial-gradient(
+            circle at 50% 25%,
+            rgba(0, 217, 155, 0.12),
+            transparent 35%
+        ),
+        #070908;
+}
+
+
+.checkout__card {
+    width: 100%;
+
+    max-width: 620px;
+
+    padding:
+        42px
+        38px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 18px;
+
+    background:
+        rgba(10, 13, 12, 0.94);
+
+    box-shadow:
+        0 35px 90px rgba(0, 0, 0, 0.45);
+}
+
+.checkout__language {
+    margin:
+        0
+        0
+        28px;
+
+    justify-content: flex-end;
+}
+
+.checkout__eyebrow {
+    color: #00d99b;
+
+    font-size: 0.68rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.checkout__card h1 {
+    margin-top: 14px;
+
+    font-size: 2.7rem;
+
+    letter-spacing: -2px;
+}
+
+
+.checkout__welcome {
+    margin-top: 10px;
+
+    color: #858d8a;
+}
+
+
+.checkout__plan {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin:
+        38px
+        0
+        24px;
+
+    padding:
+        25px
+        24px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.18);
+
+    border-radius: 12px;
+
+    background:
+        rgba(0, 217, 155, 0.04);
+}
+
+
+.checkout__plan span {
+    display: block;
+
+    color: #00d99b;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.checkout__plan strong {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #ffffff;
+
+    font-size: 1.35rem;
+}
+
+
+.checkout__plan p {
+    margin-top: 5px;
+
+    color: #858d8a;
+
+    font-size: 0.85rem;
+}
+
+
+.checkout__price {
+    text-align: right;
+}
+
+
+.checkout__price strong {
+    font-size: 2.6rem;
+
+    letter-spacing: -2px;
+}
+
+
+.checkout__warning {
+    margin-bottom: 26px;
+
+    padding:
+        15px
+        17px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+
+.checkout__warning strong {
+    color: #dfe3e1;
+
+    font-size: 0.82rem;
+}
+
+
+.checkout__warning p {
+    margin-top: 4px;
+
+    color: #777f7c;
+
+    font-size: 0.8rem;
+}
+
+
+.checkout__back {
+    display: block;
+
+    margin-top: 22px;
+
+    color: #7f8784;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-size: 0.82rem;
+}
+
+
+.checkout__back:hover {
+    color: #ffffff;
+}
+
+/* =========================
+   MIS CURSOS
+========================= */
+
+.courses-dashboard {
+    min-height: 100vh;
+
+    padding:
+        70px
+        7%;
+
+    background:
+        radial-gradient(
+            circle at 15% 10%,
+            rgba(0, 217, 155, 0.08),
+            transparent 30%
+        ),
+        #070908;
+}
+
+
+.courses-dashboard__header {
+    max-width: 1300px;
+
+    margin:
+        0 auto
+        55px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.courses-dashboard__header h1 {
+    margin-top: 10px;
+
+    font-size: 3.4rem;
+
+    letter-spacing: -2px;
+}
+
+
+.courses-dashboard__header p {
+    margin-top: 12px;
+
+    color: #8f9794;
+}
+
+
+.courses-dashboard__actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+}
+
+
+.courses-dashboard__link,
+.courses-dashboard__logout {
+    color: #909895;
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+}
+
+
+.courses-dashboard__logout {
+    color: #00d99b;
+}
+
+
+.courses-dashboard__grid {
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+
+.course-access-card {
+    min-height: 360px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding:
+        30px
+        28px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.18);
+
+    border-radius: 16px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0, 217, 155, 0.055),
+            rgba(255, 255, 255, 0.015)
+        );
+}
+
+
+.course-access-card > span {
+    color: #00d99b;
+
+    font-size: 0.65rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.course-access-card h2 {
+    margin-top: 22px;
+
+    font-size: 1.7rem;
+
+    letter-spacing: -1px;
+}
+
+
+.course-access-card p {
+    margin-top: 15px;
+
+    color: #929a97;
+
+    line-height: 1.7;
+}
+
+
+.course-access-card a {
+    margin-top: auto;
+
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #00d99b;
+
+    color: #04110d;
+
+    text-decoration: none;
+
+    font-weight: 800;
+}
+
+
+.course-access-card--locked {
+    opacity: 0.48;
+
+    border-color:
+        rgba(255, 255, 255, 0.07);
+
+    background:
+        rgba(255, 255, 255, 0.015);
+}
+
+
+.course-access-card__locked {
+    margin-top: auto;
+
+    min-height: 48px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 9px;
+
+    color: #747c79;
+
+    font-size: 0.85rem;
+
+    font-weight: 700;
+}
+
+.courses__language {
+    margin: 0;
+}
+
+/* =========================
+   RESUMEN DE CUENTA
+========================= */
+
+.account-summary {
+    max-width: 1300px;
+
+    margin:
+        0 auto
+        32px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+}
+
+
+.account-summary__item {
+    padding:
+        22px
+        24px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 12px;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+}
+
+
+.account-summary__item span {
+    display: block;
+
+    color: #747c79;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.account-summary__item strong {
+    display: block;
+
+    margin-top: 10px;
+
+    color: #ffffff;
+
+    font-size: 1.6rem;
+
+    letter-spacing: -1px;
+}
+
+
+.account-summary__item:first-child strong {
+    color: #00d99b;
+}
+
+/* =========================
+   HISTORIAL DE COMPRAS
+========================= */
+
+.purchase-history {
+    max-width: 1300px;
+
+    margin:
+        90px auto
+        0;
+}
+
+
+.purchase-history__header > span {
+    color: #00d99b;
+
+    font-size: 0.65rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.purchase-history__header h2 {
+    margin-top: 10px;
+
+    font-size: 2.5rem;
+
+    letter-spacing: -2px;
+}
+
+
+.purchase-history__header p {
+    margin-top: 8px;
+
+    color: #858d8a;
+}
+
+
+.purchase-history__list {
+    display: grid;
+
+    gap: 12px;
+
+    margin-top: 35px;
+}
+
+
+.purchase-item {
+    min-height: 90px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    padding:
+        20px
+        24px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 11px;
+
+    background:
+        rgba(255, 255, 255, 0.018);
+}
+
+
+.purchase-item__plan {
+    color: #ffffff;
+
+    font-size: 0.95rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.purchase-item p {
+    margin-top: 5px;
+
+    color: #737b78;
+
+    font-size: 0.8rem;
+}
+
+
+.purchase-item__info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+    color: #89918e;
+
+    font-size: 0.78rem;
+}
+
+
+.purchase-item__status {
+    padding:
+        7px
+        10px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.18);
+
+    border-radius: 999px;
+
+    background:
+        rgba(0, 217, 155, 0.05);
+
+    color: #00d99b;
+
+    font-size: 0.6rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.purchase-history__empty {
+    margin-top: 30px;
+
+    padding:
+        30px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 12px;
+
+    color: #737b78;
+
+    text-align: center;
+}
+
+/* =========================
+   INTERIOR DEL CURSO
+========================= */
+
+.course-page {
+    min-height: 100vh;
+
+    padding:
+        45px
+        7%
+        100px;
+
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(0, 217, 155, 0.09),
+            transparent 30%
+        ),
+        #070908;
+}
+
+
+.course-page__top {
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.course-page__back,
+.course-page__logout {
+    color: #858d8a;
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+}
+
+
+.course-page__logout {
+    color: #00d99b;
+}
+
+
+.course-page__back:hover {
+    color: #ffffff;
+}
+
+
+.course-page__hero {
+    max-width: 1100px;
+
+    margin:
+        110px auto
+        120px;
+
+    text-align: center;
+}
+
+
+.course-page__eyebrow {
+    color: #00d99b;
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+}
+
+
+.course-page__hero h1 {
+    margin-top: 20px;
+
+    font-size: clamp(
+        3.3rem,
+        7vw,
+        6.7rem
+    );
+
+    line-height: 1;
+
+    letter-spacing: -4px;
+}
+
+
+.course-page__hero p {
+    max-width: 720px;
+
+    margin:
+        28px auto
+        0;
+
+    color: #969e9b;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
+}
+
+
+.course-page__demo {
+    width: fit-content;
+
+    margin:
+        32px auto
+        0;
+
+    padding:
+        9px
+        13px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.20);
+
+    border-radius: 999px;
+
+    background:
+        rgba(0, 217, 155, 0.05);
+
+    color: #00d99b;
+
+    font-size: 0.62rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.course-page__content {
+    max-width: 1300px;
+
+    margin: 0 auto;
+}
+
+
+.course-page__section-heading {
+    max-width: 700px;
+
+    margin-bottom: 55px;
+}
+
+
+.course-page__section-heading > span {
+    color: #00d99b;
+
+    font-size: 0.67rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.course-page__section-heading h2 {
+    margin-top: 12px;
+
+    font-size: 2.8rem;
+
+    letter-spacing: -2px;
+}
+
+
+.course-page__section-heading p {
+    margin-top: 15px;
+
+    color: #8f9794;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   LECCIONES
+========================= */
+
+.lesson-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(260px, 1fr)
+        );
+
+    gap: 18px;
+}
+
+
+.lesson-card {
+    min-height: 320px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding:
+        28px
+        26px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.03),
+            rgba(255, 255, 255, 0.01)
+        );
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.lesson-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+        rgba(0, 217, 155, 0.25);
+}
+
+
+.lesson-card__top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.lesson-card__number {
+    color: #00d99b;
+
+    font-size: 0.7rem;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+}
+
+
+.lesson-card__type {
+    color: #717976;
+
+    font-size: 0.58rem;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.lesson-card h3 {
+    margin-top: 45px;
+
+    font-size: 1.45rem;
+
+    letter-spacing: -0.5px;
+}
+
+
+.lesson-card p {
+    margin-top: 14px;
+
+    color: #8f9794;
+
+    line-height: 1.7;
+}
+
+
+.lesson-card__action {
+    min-height: 46px;
+
+    margin-top: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        0
+        15px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 8px;
+
+    color: #777f7c;
+
+    font-size: 0.78rem;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+/* =========================
+   LECCIÓN
+========================= */
+
+.lesson-page {
+    min-height: 100vh;
+
+    padding:
+        45px
+        7%
+        100px;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(0, 217, 155, 0.08),
+            transparent 30%
+        ),
+        #070908;
+}
+
+
+.lesson-page__top {
+    max-width: 1200px;
+
+    margin: 0 auto;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+.lesson-page__top a {
+    color: #858d8a;
+
+    text-decoration: none;
+
+    font-size: 0.85rem;
+}
+
+
+.lesson-page__top a:last-child {
+    color: #00d99b;
+}
+
+
+.lesson-page__header {
+    max-width: 900px;
+
+    margin:
+        100px auto
+        55px;
+
+    text-align: center;
+}
+
+
+.lesson-page__header > span {
+    color: #00d99b;
+
+    font-size: 0.67rem;
+
+    font-weight: 800;
+
+    letter-spacing: 3px;
+}
+
+
+.lesson-page__header h1 {
+    margin-top: 18px;
+
+    font-size: clamp(
+        2.8rem,
+        6vw,
+        5.5rem
+    );
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+}
+
+
+.lesson-page__header p {
+    max-width: 650px;
+
+    margin:
+        24px auto
+        0;
+
+    color: #929a97;
+
+    line-height: 1.75;
+}
+
+
+.lesson-page__resource {
+    max-width: 1100px;
+
+    margin: 0 auto;
+}
+
+
+.lesson-page__video {
+    width: 100%;
+
+    display: block;
+
+    aspect-ratio: 16 / 9;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.08);
+
+    border-radius: 16px;
+
+    background: #000000;
+
+    box-shadow:
+        0 30px 90px
+        rgba(0, 0, 0, 0.45);
+}
+
+
+.lesson-page__pdf,
+.lesson-page__placeholder {
+    min-height: 200px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    border:
+        1px solid
+        rgba(0, 217, 155, 0.18);
+
+    border-radius: 15px;
+
+    background:
+        rgba(0, 217, 155, 0.035);
+
+    color: #00d99b;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-weight: 800;
+}
+
+.course-page__actions,
+.lesson-page__actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.course__language,
+.lesson__language {
+    margin: 0;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 950px) {
+
+    .auth {
+        grid-template-columns: 1fr;
+    }
+
+
+    .auth__brand {
+        min-height: auto;
+
+        padding:
+            45px
+            7%
+            70px;
+    }
+
+
+    .auth__brand-content {
+        margin-top: 100px;
+    }
+
+
+    .auth__brand-content h1 {
+        max-width: 800px;
+
+        font-size: clamp(
+            3rem,
+            9vw,
+            5rem
+        );
+    }
+
+
+    .auth__panel {
+        min-height: auto;
+
+        padding:
+            80px
+            7%;
+
+        border-left: 0;
+
+        border-top:
+            1px solid
+            rgba(255, 255, 255, 0.06);
+    }
+
+        .courses-dashboard__header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .courses-dashboard__grid {
+        grid-template-columns: 1fr;
+    }
+
+        .account-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .purchase-item {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .purchase-item__info {
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .auth__brand {
+        min-height: auto;
+
+        padding:
+            18px
+            5%;
+
+        justify-content: center;
+
+        border-bottom:
+            1px solid
+            rgba(255, 255, 255, 0.06);
+    }
+
+
+    .auth__brand::before,
+    .auth__brand::after {
+        display: none;
+    }
+
+
+    .auth__brand-content {
+        display: none;
+    }
+
+
+    .auth__logo {
+        margin:
+            0
+            auto;
+    }
+
+
+    .auth__logo-image {
+        height: 44px;
+    }
+
+
+    .auth__panel {
+        padding:
+            36px
+            5%
+            52px;
+    }
+
+
+    .auth__form-wrapper {
+        max-width: none;
+    }
+
+
+    .auth__back {
+        margin-bottom: 14px;
+    }
+
+
+    .auth__language {
+        margin:
+            0
+            0
+            28px;
+    }
+
+
+    .auth__heading h2 {
+        font-size: 2.1rem;
+
+        line-height: 1.05;
+
+        letter-spacing: -1.5px;
+    }
+
+
+    .auth__heading p {
+        margin-top: 10px;
+
+        line-height: 1.6;
+    }
+
+
+    .auth__form {
+        gap: 18px;
+
+        margin-top: 30px;
+    }
+
+
+    .auth__field input {
+        height: 52px;
+    }
+
+
+    .auth__switch {
+        margin-top: 24px;
+
+        line-height: 1.5;
+    }
+
+
+
+        .courses-dashboard {
+        padding:
+            50px
+            5%;
+    }
+
+    .courses-dashboard__header h1 {
+        font-size: 2.7rem;
+    }
+
+    .courses-dashboard__actions {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    /* =========================
+    MIS CURSOS - MÓVIL
+    ========================= */
+
+    .courses-dashboard {
+        padding:
+            55px
+            5%;
+    }
+
+
+    .courses-dashboard__header {
+        gap: 24px;
+
+        margin-bottom: 40px;
+    }
+
+
+    .courses-dashboard__header h1 {
+        font-size: 2.45rem;
+
+        line-height: 1;
+    }
+
+
+    .courses-dashboard__actions {
+        gap: 10px;
+    }
+
+
+    .courses__language {
+        margin: 0 0 8px;
+    }
+
+
+    .account-summary {
+        gap: 12px;
+
+        margin-bottom: 55px;
+    }
+
+
+    .account-summary__item {
+        min-height: auto;
+
+        padding:
+            22px
+            20px;
+    }
+
+
+    .courses-dashboard__grid {
+        gap: 18px;
+    }
+
+
+    .course-access-card {
+        min-height: auto;
+
+        padding:
+            28px
+            22px;
+    }
+
+
+    .course-access-card h2 {
+        font-size: 1.65rem;
+
+        line-height: 1.1;
+    }
+
+
+    .course-access-card p {
+        margin-bottom: 32px;
+
+        line-height: 1.65;
+    }
+
+
+    .course-access-card a,
+    .course-access-card__locked {
+        min-height: 48px;
+    }
+
+
+    /* HISTORIAL */
+
+    .purchase-history {
+        margin-top: 70px;
+    }
+
+
+    .purchase-history__header h2 {
+        font-size: 2.3rem;
+    }
+
+
+    .purchase-item {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+
+        padding:
+            22px
+            20px;
+    }
+
+
+    .purchase-item__info {
+        width: 100%;
+
+        justify-content: flex-start;
+
+        flex-wrap: wrap;
+
+        gap:
+            10px
+            16px;
+    }
+
+}

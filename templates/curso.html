@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ t("curso_" ~ curso_id ~ "_nombre") }} | Vendera Academy
+    </title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="course-page">
+
+        <div class="course-page__top">
+
+            <a
+                href="{{ url_for('mis_cursos') }}"
+                class="course-page__back"
+            >
+                {{ t("volver_mis_cursos") }}
+            </a>
+
+             <div class="course-page__actions">
+
+                <div class="auth__language course__language">
+
+                  <a
+                    href="{{ url_for(
+                        'cambiar_idioma',
+                        codigo='es',
+                        next=request.full_path
+                    ) }}"
+                    class="{% if idioma == 'es' %}active{% endif %}"
+            >
+                ES
+            </a>
+
+            <span>/</span>
+
+            <a
+                href="{{ url_for(
+                    'cambiar_idioma',
+                    codigo='en',
+                    next=request.full_path
+                ) }}"
+                class="{% if idioma == 'en' %}active{% endif %}"
+            >
+                EN
+            </a>
+
+        </div>
+            
+            <a
+                href="{{ url_for('logout') }}"
+                class="course-page__logout"
+            >
+                {{ t("cerrar_sesion_texto") }}
+            </a>
+
+        </div>
+
+    </div>
+
+        <header class="course-page__hero">
+
+        <span class="course-page__eyebrow">
+            {{ t("curso_label") }} {{ curso.numero }}
+        </span>
+
+            <h1>
+                {{ t("curso_" ~ curso_id ~ "_nombre") }}
+            </h1>
+
+            <p>
+                {{ t("curso_" ~ curso_id ~ "_desc") }}
+            </p>
+
+            <div class="course-page__demo">
+                {{ t("contenido_demo") }}
+            </div>
+
+        </header>
+
+
+        <section class="course-page__content">
+
+            <div class="course-page__section-heading">
+
+                <span>
+                    {{ t("programa_label") }}
+                </span>
+
+                <h2>
+                    {{ t("contenido_curso") }}
+                </h2>
+
+                <p>
+                    {{ t("contenido_curso_texto") }}
+                </p>
+
+            </div>
+
+
+            <div class="lesson-grid">
+
+                {% for modulo in curso.modulos %}
+
+                    <article class="lesson-card">
+
+                        <div class="lesson-card__top">
+
+                            <span class="lesson-card__number">
+                                {{ modulo.numero }}
+                            </span>
+
+                            {% if modulo.tipo == "video" %}
+
+                                <span class="lesson-card__type">
+                                    {{ t("video_demo") }}
+                                </span>
+
+                            {% else %}
+
+                                <span class="lesson-card__type">
+                                    {{ t("pdf_demo") }}
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                            <h3>
+                                {{ t(
+                                    "modulo_" ~
+                                    curso_id ~
+                                    "_" ~
+                                    modulo.numero ~
+                                    "_titulo"
+                                ) }}
+                            </h3>
+
+                            <p>
+                                {{ t(
+                                    "modulo_" ~
+                                    curso_id ~
+                                    "_" ~
+                                    modulo.numero ~
+                                    "_desc"
+                                ) }}
+                            </p>
+
+
+                            <a
+                                href="{{ url_for(
+                                    'leccion',
+                                    curso_id=curso_id,
+                                    numero=loop.index
+                                ) }}"
+                                class="lesson-card__action"
+                            >
+
+                        {% if modulo.tipo == "video" %}
+
+                            {{ t("abrir_video") }}
+
+                        {% else %}
+
+                            {{ t("abrir_pdf") }}
+
+                        {% endif %}
+
+</a>
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="{{ idioma }}">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ t(
+            "modulo_" ~
+            curso_id ~
+            "_" ~
+            modulo.numero ~
+            "_titulo"
+        ) }}
+        | Vendera Academy
+    </title>
+
+    <link
+    rel="icon"
+    type="image/png"
+    href="{{ url_for('static', filename='img/logo-vendera-blanco.png') }}"
+>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/auth.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="lesson-page">
+
+<div class="lesson-page__top">
+
+    <a href="{{ url_for('curso', curso_id=curso_id) }}">
+        {{ t("volver_curso") }}
+    </a>
+
+
+    <div class="lesson-page__actions">
+
+        <div class="auth__language lesson__language">
+
+            <a
+                href="{{ url_for(
+                    'cambiar_idioma',
+                    codigo='es',
+                    next=request.full_path
+                ) }}"
+                class="{% if idioma == 'es' %}active{% endif %}"
+            >
+                ES
+            </a>
+
+            <span>/</span>
+
+            <a
+                href="{{ url_for(
+                    'cambiar_idioma',
+                    codigo='en',
+                    next=request.full_path
+                ) }}"
+                class="{% if idioma == 'en' %}active{% endif %}"
+            >
+                EN
+            </a>
+
+        </div>
+
+
+        <a href="{{ url_for('logout') }}">
+            {{ t("cerrar_sesion_texto") }}
+        </a>
+
+    </div>
+
+</div>
+
+
+        <header class="lesson-page__header">
+
+<span>
+    {{ t("leccion_label") }} {{ modulo.numero }}
+</span>
+
+<h1>
+    {{ t(
+        "modulo_" ~
+        curso_id ~
+        "_" ~
+        modulo.numero ~
+        "_titulo"
+    ) }}
+</h1>
+
+<p>
+    {{ t(
+        "modulo_" ~
+        curso_id ~
+        "_" ~
+        modulo.numero ~
+        "_desc"
+    ) }}
+</p>
+
+        </header>
+
+
+        <section class="lesson-page__resource">
+
+            {% if modulo.tipo == "video" %}
+
+                {% if modulo.archivo %}
+
+                    <video
+                        controls
+                        preload="metadata"
+                        class="lesson-page__video"
+                    >
+
+                        <source
+                            src="{{ url_for(
+                                'recurso_privado',
+                                curso_id=curso_id,
+                                numero=numero
+                            ) }}"
+                            type="video/mp4"
+                        >
+
+                        {{ t("video_no_soportado") }}
+
+                    </video>
+
+                {% else %}
+
+                    <div class="lesson-page__placeholder">
+                        {{ t("video_no_cargado") }}
+                    </div>
+
+                {% endif %}
+
+
+            {% elif modulo.tipo == "pdf" %}
+
+                {% if modulo.archivo %}
+
+                    <a
+                        href="{{ url_for(
+                            'recurso_privado',
+                            curso_id=curso_id,
+                            numero=numero
+                        ) }}"
+                        class="lesson-page__pdf"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        {{ t("abrir_pdf_demo") }}
+                    </a>
+
+                {% else %}
+
+                    <div class="lesson-page__placeholder">
+                        {{ t("pdf_no_cargado") }}
+                    </div>
+
+                {% endif %}
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>
